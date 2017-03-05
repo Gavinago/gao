@@ -117,4 +117,7 @@ public class AjaxController {
 		return mav;
 	}
 	
+	public void test(){
+		
+	}
 }
