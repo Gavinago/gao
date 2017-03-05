@@ -1,0 +1,134 @@
+*{
+	font-size:12px;
+}
+body{
+	visibility:hidden;
+}
+#loading-mask{
+	position:absolute;
+	background:#F2FBFF;
+	visibility:visible;
+	display:block;
+	width:100%;
+	height:100%;
+	filter:alpha(opacity=80);
+	opacity:0.80;
+	z-index:999999999;
+}
+#loading-msg{
+	width:150px;
+	margin:10px auto;
+	padding:5px 10px;
+	text-align:center;
+	font-weight:bold;
+	font-size:14px;
+	color:#fff;
+	background:#aaa;
+}
+.easyui-menu{
+	display:none;
+}
+form{
+	margin:0;
+	padding:0;
+}
+.login{
+	background:url('images/login_01.gif') no-repeat;
+}
+.mainwrap{
+	//width:960px;
+	width:100%;
+	height:100%;
+	margin:0 auto;
+	background:#fff;
+}
+.header{
+	background:url(images/topbg.jpg) repeat-x;
+	height:60px;
+	width:100%;
+}
+.topmenu{
+	border-top:1px solid #ccc;
+	background:url(images/btn.jpg) repeat-x;
+	width:100%;
+}
+.toptitle{
+	position:absolute;
+	left:20px;
+	color:#fff;
+	font-size:16px;
+	font-weight:bold;
+}
+
+.maintitle{
+	position:absolute;
+	left:15px;
+	color:#fff;
+	font-size:16px;
+	font-weight:bold;
+	padding:1px;
+}
+
+
+
+.subtitle{
+	font-size:14px;
+	font-weight:bold;
+	color:#666;
+	padding:10px 5px;
+}
+.toolbar{
+	padding:4px 5px;
+	background:#efefef;
+	border-bottom:1px solid #92B7D0;
+}
+.toolbar a.l-btn{
+	background:url('images/btn.jpg') repeat-x;
+	border:1px solid #ccc;
+	border-radius:3px;
+	-moz-border-radius:3px;
+	-webkit-border-radius: 3px;
+}
+.toolbar a.l-btn:hover{
+	background:#fafafa;
+}
+.submenu{
+}
+.submenu a{
+	display:block;
+	line-height:150%;
+	padding:3px 15px;
+	text-decoration:none;
+	color:#666;
+	margin-bottom1:5px;
+	background:url('images/bullet_blue.png') no-repeat 0 center;
+}
+.submenu a:hover{
+	background-color:#ffffcc;
+}
+.form-table tr{
+	height:25px;
+}
+.icon-find{
+	background:url('images/find.png') no-repeat;
+}
+.icon-check{
+	background:url('images/check.png') no-repeat;
+}
+.icon-open{
+	background:url('images/open.png') no-repeat;
+}
+.icon-saves{
+	background:url('images/filesaveas.png') no-repeat;
+}
+.ww{font-family:"微软雅黑", "幼圆", "宋体";font-size:14px; color:#0066cc;}
+.ww li{ list-style-image:url(images/bullet_blue.png);}
+.ww li a{ text-decoration:none; padding:5px;inheritcolor:#0066CC;}
+.ww li a:visited{font-family:"微软雅黑", "幼圆", "宋体";font-size:14px; color:#0066cc;}
+.ww li a:hover{border:1px dashed #069; width:auto; height:20px; background:#6CF; color:#fff;}
+
+.east{ font-family:"微软雅黑", "幼圆", "宋体";font-size:14px; color:#0066cc;}
+.east li{ list-style-image:url(images/arrow.jpg);}
+.east li a{text-decoration:none; vertical-align:middle;color:#0066CC;}
+.east li a:hover{ width:auto; height:20px;color:#27AAE1;font-weight:bold; text-decoration:underline;}
+

@@ -1,0 +1,45 @@
+magiczoom.css@charset "utf-8";
+
+/*基础标签重置*/
+html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, address, cite, code, del, dfn, em, img, ins, kbd, q, samp, small, sub, sup, var, b, i, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, caption, tfoot, thead, th, s { margin:0; padding:0; border:0; font-size:100%; vertical-align:baseline; font-style:normal; text-decoration:none;word-wrap: break-word;}
+textarea{ font-size:12px;}
+ol,ul,li { list-style:none;}
+section, article, aside, header, footer, nav, dialog, figure { display:block;}
+figure { margin:0; }
+
+/*总体清除浮动*/
+.clearfix:after {content:"."; display:block; height:0; clear:both; visibility:hidden; }
+.clearfix { display:inline-block; }/* Hides from IE-mac \*/
+* html .clearfix { height:1%; }
+.clearfix { display:block; }/* End hide from IE-mac */
+div{overflow:hidden}
+/*浮动*/
+.public_fl { float:left;}
+.public_fr { float:right;}
+
+
+/*框架结构*/
+
+.w1000{ width:1000px; height:auto; margin:0 auto;}
+.w790{ width:790px; height:auto;}
+
+#footer{ width:100%; height:325px;margin-top:40px;background: url(../images/foot.jpg) repeat-x left top;}
+
+
+.pt_20{ padding-top:20px;}
+.pt_10{ padding-top:10px;}
+.pl_10{ padding-left:10px;}
+.mt_20{ margin-top:20px;}
+
+/*模拟下拉框样式*/
+
+.CRselectBox {background:url(../images/select_btn.jpg) no-repeat 65px 9px #ffffff; width:81px; height:24px;float:left; border:solid 1px #cccccc;}
+.CRselectBoxHover{background:url(../images/select_btn.jpg) no-repeat 65px 9px #ffffff;}
+.CRselectBox a.CRselectValue {display:block; height:24px; line-height:24px; white-space:nowrap; color:#444444;overflow:hidden;width:74px; padding-left:6px;}
+.CRselectBoxOptions {background:#FFFFFF; border:1px solid #cccccc; margin-left:0px;list-style:none;overflow-y:auto;z-index:1000;position: absolute;width:80px;display:none;}
+.CRselectBoxOptions a{color:#000;display:block;height:22px;line-height:22px;padding-left:4px;background:#fff;overflow:hidden;white-space:nowrap;}
+.CRselectBoxOptions a:hover{background:#FFFFFF;}
+.CRselectBoxOptions a.selected{background:#F8F8F8}
+/* 解决 firefox 点击放大出现虚线框，从而导致滚动条的问题  */
+.CRselectBox a {outline: none; text-decoration:none;}
+.CRselectBox a:focus { outline: none; text-decoration:none;} 

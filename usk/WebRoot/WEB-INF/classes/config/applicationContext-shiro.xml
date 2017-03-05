@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans.xsd 
+		http://www.springframework.org/schema/tx 
+		http://www.springframework.org/schema/tx/spring-tx.xsd 
+		http://www.springframework.org/schema/context 
+		http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/aop
+		http://www.springframework.org/schema/aop/spring-aop.xsd"
+	default-lazy-init="false">
+
+		<!-- 权限管理器 -->
+	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+		<property name="realm" ref="shiroDbRealm" />
+		<property name="sessionManager" ref="sessionManager" />
+	<!-- 缓存管理器 -->
+<property name="cacheManager" ref="shiroCacheManager" />
+	</bean>
+	
+<bean id="sessionManager" class="org.apache.shiro.web.session.mgt.DefaultWebSessionManager">
+<!-- 超时时间 -->
+    <property name="globalSessionTimeout" value="3600000"/>
+    <property name="sessionDAO" ref="shiroSessionDao"/>
+    <property name="sessionIdCookie" ref="sharesession"/>
+    <!-- 定时检查失效的session -->
+     <property name="sessionValidationSchedulerEnabled" value="true" />
+</bean>
+
+<bean id="sharesession" class="org.apache.shiro.web.servlet.SimpleCookie">
+    <constructor-arg name="name" value="SHAREJSESSIONID"/>
+</bean>
+<bean id="shiroSessionDao"  class="org.apache.shiro.session.mgt.eis.EnterpriseCacheSessionDAO" />
+
+<!-- 单机session -->
+<bean id="shiroCacheManager" class="org.apache.shiro.cache.MemoryConstrainedCacheManager" /> 
+
+<!-- session 集群 -->
+<!-- 
+<bean id="shiroCacheManager" class="org.springrain.frame.shiro.ShiroRedisCacheManager" > 
+<property name="cached" ref="redisCached" />
+</bean>
+ -->
+ <bean id="kickoutSessionControlFilter"   
+class="com.wssys.shiroController.KickoutSessionControlFilter">  
+    <property name="cacheManager" ref="shiroCacheManager"/>  
+    <property name="sessionManager" ref="sessionManager"/>  <!-- 用于根据会话ID，获取会话进行踢出操作的； -->
+  
+    <property name="kickoutAfter" value="false"/>  <!-- 是否踢出后来登录的，默认是false；即后者登录的用户踢出前者登录的用户； -->
+    <property name="maxSession" value="1"/>  <!-- 同一个用户最大的会话数，默认1；比如2的意思是同一个用户允许最多同时两个人登录； -->
+    <property name="kickoutUrl" value="/getout.do?kickout=1"/>  <!-- 被踢出后重定向到的地址； -->
+</bean>   
+
+
+	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean"
+		depends-on="frameperms">
+		<property name="securityManager" ref="securityManager" />
+		<property name="loginUrl" value="/login.do" />
+		<property name="successUrl" value="/viewAllContacts.do" />
+		<property name="unauthorizedUrl" value="/noAuth.do" />
+		<property name="filterChainDefinitions">
+			<value>
+			/sys/pdf/**= authc	<!--  采购合同文件查看权限-->
+			    /js/** = anon
+			   /css/** = anon
+			   /img/** = anon
+			   /json/** = user
+			   /Plug/** = anon
+			   /images/** = anon
+			   /ui/** =anon
+			  
+			   	/favicon.ico = anon
+			   	/taglib_includes.jsp= anon
+			   	/common/common.jsp= anon
+			   	/error/** = authc
+			   	/index.jsp = anon
+			   /viewAllContacts.do = authc,kickout	<!-- 系统后台主页-->
+			   /viewLeftMenuJson.do=user	<!-- 系统左侧菜单查询 -->
+			   /getcblphotoById.do= authc	<!-- 图片查询 -->
+			   /gettaxtaxregphotoById.do= authc	<!-- 图片查询 -->
+			   /getBIGGoodsImagePhotoById.do=authc	<!-- 图片原图查询 -->
+			   /getorgstrucodephotoById.do= authc	<!-- 图片查询 -->
+			   /getCblProPhotoById.do= authc	<!-- 图片查询 -->
+			   /gettaxtaxregProPhotoById.do= authc	<!-- 图片查询  -->
+			   /getorgstrucodeProPhotoById.do= authc	<!-- 图片查询  -->
+			   /getYlPhotoById.do=authc		<!-- 图片预览  -->
+			   /getGoodsImagePhotoById.do= authc	<!-- 图片查询  -->
+			   /viewCompanyJson.do= authc	<!-- 公司下拉数据 by用户关系表-->
+			   /viewFrontUserCompanyJson.do= authc	<!-- 公司下拉数据 by会员 关系表-->
+			   /viewCompanyByContactsReJson.do= authc	<!-- 公司下拉数据by联系人关系表 -->
+			   /purchasingManagement.do=authc	<!-- 采购合同确认框  -->
+			   /pmtempView.do=anon				<!-- 采购合同确认  -->
+			   /conPMfirmOrders.do=authc		<!-- 生成采购合同  -->
+			   /viewDW.do=authc					<!-- 提货仓库下拉框信息显示  -->
+			   /bolsucaction.do=authc	<!-- 系统提示  -->
+			   /deliversuc.do=authc	<!-- 系统提示  -->
+			   /addGoodsMultipleFile.do=anon		<!-- 多图上传  -->
+			   /lxrsysmsg.do=authc		<!-- 系统提示  -->
+			   /monitoring=authc		<!-- 系统监控  -->
+			   /getslaesJsValue.do=authc	<!-- 预结算金额 提示信息 -->
+			   
+			   /competencesys.do= user	<!--  无权限页面-->
+			   /main.do= user			<!--  系统后台右侧首页-->
+			   /userlogout.do = anon
+			    /noAuth.do = anon
+			   /login.do = anon
+			   /getout.do = anon 	<!-- 重复登录踢出-->
+			   /loginValid.do = anon	<!--  登录验证-->
+			    /**/ajax/** = user
+			   /** = kickout,user,frameperms
+			</value>
+		</property>
+		<!-- 声明自定义的过滤器 -->
+		<property name="filters">
+			<map>
+				<entry key="frameperms" value-ref="frameperms"></entry>
+				<entry key="kickout" value-ref="kickoutSessionControlFilter"/>
+			</map>
+			
+		</property>
+
+		
+	</bean>
+	
+ 
+  
+<!-- 起效权限注解,这个很少在web项目中用到,一般是控制url的访问,不是在controller中声明权限注解 -->
+	<bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor" />
+</beans>

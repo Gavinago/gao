@@ -1,0 +1,14 @@
+[
+    {
+        "id":0,
+        "text": "柜",
+        "checked": true,
+        "attributes": {}
+    },
+    {
+        "id": 1,
+        "text": "货车",
+        "checked": false,
+        "attributes": {}
+    }
+]

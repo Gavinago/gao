@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+	
+	<!-- 对模型视图名称的解析，即在模型视图名称添加前后缀 -->
+	  <bean id="viewResolver"
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix">
+			<value></value>
+		</property>
+		<property name="suffix">
+			<value>.jsp</value>
+		</property>
+	<property name="order"><value>0</value></property>  
+	</bean>
+	
+	  <!-- 配置freeMarker视图解析器 -->  
+    <bean id="viewResolverFtl" class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">  
+        <property name="viewClass" value="com.wssys.controller.ExFreeMarkerView"/> 
+         <!--  <property name="viewClass" value="org.springframework.web.servlet.view.freemarker.FreeMarkerView"/>-->  
+         
+        <property name="contentType" value="text/html; charset=utf-8"/>  
+        <property name="cache" value="true" />  
+        <property name="suffix" value=".ftl" />  
+        <property name="order" value="1"/>  
+    </bean>  
+      
+    <!-- 配置freeMarker的模板路径 -->  
+    <!-- <bean id="freemarkerConfig" class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">   -->
+    <bean id="freemarkerConfig" class="com.wssys.config.web.freemarker.ShiroTagFreeMarkerConfigurer">  
+        <property name="templateLoaderPath">  
+            <value>/sys/ftl/</value>  
+        </property>  
+        <property name="freemarkerVariables">  
+            <map>  
+                <entry key="xml_escape" value-ref="fmXmlEscape" />  
+            </map>  
+        </property>  
+        <property name="defaultEncoding">  
+            <value>utf-8</value>  
+        </property>  
+        <property name="freemarkerSettings">  
+            <props>  
+                <prop key="template_update_delay">5</prop> <!--检查模板是否更新  秒 --> 
+            </props>  
+        </property>  
+    </bean>  
+	
+  <bean id="fmXmlEscape" class="freemarker.template.utility.XmlEscape"/>  
+	
+	<bean id="multipartResolver"  
+    class="org.springframework.web.multipart.commons.CommonsMultipartResolver">  
+  
+    <!-- one of the properties available; the maximum file size in bytes  5242880-->  
+    <property name="maxUploadSize" value="10000000"/>  
+	</bean>  
+
+  <bean id="exceptionResolver" class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+    <property name="exceptionMappings">
+   <props>
+    <prop key="java.sql.SQLException">showDBError</prop>
+   <!--   <prop key="java.lang.RuntimeException">exception</prop> -->
+     <prop key="org.springframework.web.multipart.MaxUploadSizeExceededException">maxUploadExceeded</prop>
+   </props> 
+  </property>
+ </bean>
+ 
+ <bean  class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter" >  
+        <property name="messageConverters">  
+             <list>  
+                 <bean class = "org.springframework.http.converter.StringHttpMessageConverter">  
+                    <property name = "supportedMediaTypes">  
+                         <list>  
+                             <value>text/plain;charset=UTF-8</value>  
+                         </list>  
+                    </property>  
+                 </bean>  
+             </list>  
+        </property>  
+    </bean>  
+
+ 
+
+   
+</beans>

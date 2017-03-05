@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:javaee="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd" version="2.4">
+  <listener>
+    <description>Comet4J容器侦听</description>
+    <listener-class>org.comet4j.core.CometAppListener</listener-class>
+  </listener>
+  <servlet>
+    <description>Comet连接[默认:org.comet4j.core.CometServlet]</description>
+    <display-name>CometServlet</display-name>
+    <servlet-name>CometServlet</servlet-name>
+    <servlet-class>org.comet4j.core.CometServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CometServlet</servlet-name>
+    <url-pattern>/conn</url-pattern>
+  </servlet-mapping>
+  <listener>
+    <description>MailtaskProgress</description>
+    <listener-class>com.wssys.comet4j.MailtaskProgress</listener-class>
+  </listener>
+  
+  
+  <!-- <listener>
+  		<description>mylistern</description>  
+       <listener-class>com.wssys.listener.LoginUniqueListener</listener-class>  
+</listener>  -->
+
+
+  
+  <filter>
+    <filter-name>encodingFilter</filter-name>
+    <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+    <init-param>
+      <param-name>encoding</param-name>
+      <param-value>UTF-8</param-value>
+    </init-param>
+    <init-param>
+      <param-name>forceEncoding</param-name>
+      <param-value>true</param-value>
+    </init-param>
+  </filter>
+  <filter-mapping>
+    <filter-name>encodingFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+ 
+  <filter>
+    <filter-name>shiroFilter</filter-name>
+    <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+    <init-param>
+      <param-name>targetFilterLifecycle</param-name>
+      <param-value>true</param-value>
+    </init-param>
+  </filter>
+  <filter>
+    <filter-name>httpMethodFilter</filter-name>
+    <filter-class>org.springframework.web.filter.HiddenHttpMethodFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>encodingFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>shiroFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+    <dispatcher>REQUEST</dispatcher>
+    <dispatcher>FORWARD</dispatcher>
+    <dispatcher>INCLUDE</dispatcher>
+    <dispatcher>ERROR</dispatcher>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>httpMethodFilter</filter-name>
+    <servlet-name>mailsys</servlet-name>
+  </filter-mapping>
+  
+    <!--  <context-param>
+    <param-name>contextConfigLocation</param-name>
+    <param-value>classpath:applicationContext.xml
+    </param-value>
+  </context-param>-->
+  <!--                   classpath:net/bull/javamelody/monitoring-spring.xml和spring集成时添加 -->
+  <context-param>
+<param-name> contextConfigLocation</param-name>
+             <param-value>
+                  classpath:applicationContext.xml<!--Spring配置文件-->
+             </param-value>
+</context-param>
+  
+  <!-- 性能监控 -->
+ <filter>  
+        <filter-name>monitoring</filter-name>  
+        <filter-class>net.bull.javamelody.MonitoringFilter</filter-class>  
+        <init-param>  
+            <param-name>log</param-name>  
+            <param-value>true</param-value>  
+        </init-param>  
+    </filter>  
+    <filter-mapping>  
+        <filter-name>monitoring</filter-name>  
+        <url-pattern>/*</url-pattern>  
+    </filter-mapping>  
+    <listener>  
+        <listener-class>net.bull.javamelody.SessionListener</listener-class>  
+    </listener>
+    
+
+  
+  
+
+  
+  
+  <servlet>
+    <servlet-name>dispatcher</servlet-name>
+    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>dispatcher</servlet-name>
+    <url-pattern>*.do</url-pattern>
+  </servlet-mapping>
+  
+  
+  <servlet>
+    <servlet-name>kaptcha</servlet-name>
+    <servlet-class>  
+            com.google.code.kaptcha.servlet.KaptchaServlet  
+        </servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>kaptcha</servlet-name>
+    <url-pattern>/images/kaptcha.jpg</url-pattern>
+  </servlet-mapping>
+  
+  
+  <listener>
+    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+  </listener>
+  <context-param>
+    <param-name>log4jConfigLoaction</param-name>
+    <param-value>log4j.properties</param-value>
+  </context-param>
+  <listener>
+    <listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
+  </listener>
+  <welcome-file-list>
+    <welcome-file>login.do</welcome-file>
+  </welcome-file-list>
+  
+  <!-- 错误页面控制 -->
+  <error-page>
+		<error-code>404</error-code>
+		<location>/error/404.jsp</location>
+	</error-page>
+  
+  <context-param>
+    <param-name>webAppRootKey</param-name>
+    <param-value>webapp.root</param-value>
+  </context-param>
+</web-app>

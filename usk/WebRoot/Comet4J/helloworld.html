@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Comet4J Hello World</title>
+<link rel="stylesheet" type="text/css" id="easyuiTheme"  href="<%=basePaths %>ui/themes/default/easyui.css">
+	<link rel="stylesheet" type="text/css" href="../ui/themes/icon.css">
+	<link rel="stylesheet" type="text/css" href="../ui/demo.css">
+	<!--  <script type="text/javascript" src="../ui/jquery.min.js"></script>-->
+	<script type="text/javascript" src="../ui/jquery-1.8.0.min.js"></script>
+	<script type="text/javascript" src="../ui/jquery.easyui.min.js"></script>
+	<script type="text/javascript" src="../ui/locale/easyui-lang-zh_CN.js"></script>
+	  <script type="text/javascript" src="../ui/jquery.cookie.js"></script>
+ <script type="text/javascript" src="../ui/changeEasyuiTheme.js"></script>
+ 
+ 
+<script type="text/javascript" src="../Comet4J/comet4j.js"></script>
+	<link rel="stylesheet" href="../Plug/KindEditor/themes/default/default.css" />
+	<link rel="stylesheet" href="../Plug/KindEditor/plugins/code/prettify.css" />
+	<script charset="utf-8" src="../Plug/KindEditor/kindeditor.js"></script>
+	<script charset="utf-8" src="../Plug/KindEditor/lang/zh_CN.js"></script>
+	<script charset="utf-8" src="../Plug/KindEditor/plugins/code/prettify.js"></script>
+	
+	
+<script type="text/javascript">
+	var editor ;
+	
+		KindEditor.ready(function(K) {
+		 editor = K.create('textarea[name="content"]');
+			var editor1 = K.create('textarea[name="content"]', {
+				cssPath : 'Plug/KindEditor/plugins/code/prettify.css',
+				uploadJson : 'sendOperate/upload_json.jsp',
+				fileManagerJson : 'sendOperate/file_manager_json.jsp',
+				allowFileManager : true,
+				afterCreate : function() {
+					var self = this;
+					K.ctrl(document, 13, function() {
+						self.sync();
+						document.forms['example'].submit();
+					});
+					K.ctrl(self.edit.doc, 13, function() {
+						self.sync();
+						document.forms['example'].submit();
+					});
+				}
+			});
+			prettyPrint();
+		});
+
+function init(){
+
+        var kbDom = document.getElementById('kb');
+        JS.Engine.on({
+                hello : function(kb){//侦听一个channel
+						alert(kb);
+                        kbDom.innerHTML = kb;
+                }
+        });
+        JS.Engine.start('../conn');
+}
+</script>
+</head>
+<body onload="init()">
+        剩余内存：<span id="kb">...</span>KB
+</body>
+</html>
