@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!-- SiteMesh 的配置文件 -->
+<decorators defaultdir="/sitemesh">
+	<excludes>
+		<!-- 排除静态文件和ajax请求 -->
+		<pattern>/assets/*</pattern>
+		<pattern>/ajax/*</pattern>
+	</excludes>
+
+	<!-- auto模板定义 -->
+    <decorator name="auto" page="mesh_auto.jsp">
+        <pattern>/hotel/*</pattern>
+    </decorator>
+
+	<!-- boot模板定义 -->
+    <decorator name="boot" page="mesh_boot.jsp">
+        <pattern>/nest/*</pattern>
+    </decorator>
+
+	<!-- back模板定义 -->
+    <decorator name="back" page="mesh_back.jsp">
+        <pattern>/font/*</pattern>
+        <pattern>/error/*</pattern>
+    </decorator>
+
+	<!-- home模板定义 -->
+    <decorator name="home" page="mesh_home.jsp">
+        <pattern>/back/*</pattern>
+    </decorator>
+
+	<!-- one模板定义 -->
+    <decorator name="login" page="mesh_login.jsp">
+         <pattern>*/login.do</pattern>
+    </decorator>
+</decorators>

@@ -1,0 +1,54 @@
+@CHARSET "UTF-8";
+.aaa{
+	text-align: center;
+	font-size: 10px;
+}
+#totaldiv{
+	margin:auto;
+	width: 550px;
+	height: 550px;
+	background:lime;
+}
+table{
+	position:absolute;
+	margin-left: 15px;
+	margin-top: 30px;
+}
+td{
+	width:120px;
+	line-height: 70px;
+	text-align: right;
+}
+input{
+	width:120px;
+	line-height: 48px;
+	padding-left: 10px;
+	text-align: center;
+	font-size: 25px;
+}
+.aaa{
+	text-align: center;
+	font-size: 10px;
+	color: red;
+}
+#kaptcha{
+	height: 50px;
+	width:120px;
+	cursor: pointer;
+}
+#hintdiv{
+	position:absolute;
+	margin-top:350px;
+	margin-left:15px;
+	width: 520px;
+	height:80px;
+	background: fuchsia;
+}
+#versiondiv{
+	position:absolute;
+	margin-top:450px;
+	margin-left:15px;
+	height:80px;
+	width: 520px;
+	background: olive;
+}

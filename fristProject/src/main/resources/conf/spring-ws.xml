@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:ws="http://jax-ws.dev.java.net/spring/core"
+	xmlns:wss="http://jax-ws.dev.java.net/spring/servlet"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.1.xsd
+		http://jax-ws.dev.java.net/spring/core
+        http://jax-ws.dev.java.net/spring/core.xsd
+        http://jax-ws.dev.java.net/spring/servlet
+        http://jax-ws.dev.java.net/spring/servlet.xsd" >
+        <!-- <context:annotation- config/>隐式地向 Spring容器注册AutowiredAnnotationBeanPostProcessor、RequiredAnnotationBeanPostProcessor、CommonAnnotationBeanPostProcessor以及PersistenceAnnotationBeanPostProcessor这4个BeanPostProcessor -->
+        <!--要想在以下的com.orh.**包中使用 @Resource、@PostConstruct、@PreDestroy@PersistenceContext 这几个注解就必须如下声明-->
+        <context:annotation-config></context:annotation-config>
+        <context:component-scan base-package="com.gov.**"></context:component-scan>
+        <!-- 注入bean -->
+        <bean id="compareTime" class="com.gov.util.CompareTime"></bean>
+</beans>

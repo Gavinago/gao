@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gov.dao.StepMapper">
+    <resultMap id="BaseResultMap" type="com.gov.model.Step">
+		<id column="stepid" property="stepid" jdbcType="INTEGER" />
+		<result column="stepparent" property="stepparent" jdbcType="INTEGER" />
+		<result column="stepname" property="stepname" jdbcType="VARCHAR" />
+		<result column="stepurl" property="stepurl" jdbcType="VARCHAR" />
+		<result column="class" property="clazz" jdbcType="INTEGER" />
+		<result column="state" property="state" jdbcType="INTEGER" />
+		<result column="addition" property="addition" jdbcType="VARCHAR" />
+		<result column="addition2" property="addition2" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+	    step_tab.stepid,
+	    step_tab.stepparent,
+	    step_tab.stepname,
+	    step_tab.stepurl,
+	    step_tab.class,
+	    step_tab.state,
+	    step_tab.addition,
+	    step_tab.addition2
+	</sql>
+	<select id="selectAllStep" resultMap="BaseResultMap">
+	    select 
+	    <include refid="Base_Column_List"/>
+	    from step_tab where stepparent = #{stepparent,jdbcType=INTEGER}
+	</select>
+	<select id="selectAllParent" resultMap="BaseResultMap">
+	    select 
+	    <include refid="Base_Column_List"/>
+	    from step_tab where stepparent IS NULL AND state=#{state,jdbcType=INTEGER}
+	</select>
+	<select id="selectClassByState" resultMap="BaseResultMap">
+	    select 
+	     step_tab.stepname,step_tab.class
+	    from step_tab where stepparent IS NOT NULL  AND class IS NOT NULL AND state=#{state,jdbcType=INTEGER}
+	</select>
+</mapper>
