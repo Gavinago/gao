@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"	
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd">
+	<bean id="bmw" class="com.gao.entity.Car">
+	
+	<!-- set注入属性 -->
+	<property name="id"  value="1"/>
+	<property name="brand"  value="宝马i8"/>
+	<property name="price"  value="456123.77"/>
+	</bean>
+	
+	<!-- <bean id="bmw1" class="com.gao.entity.Car"/> 创建对象  引用为 bmw1 同  Car bmw1 = new Car(); -->
+	<bean id="bmw1" class="com.gao.entity.Car"/>
+	
+	<!-- set注入（ p空间注入    p 是上面 xmlns:p=""） -->
+	<bean id= "bmw2" class="com.gao.entity.Car" p:brand="奔驰" p:price="4777.88" p:id="2"/>
+	
+	<!-- 构造方法的注入  顺序不可变    注意顺序必须和构造方法的参数一致-->
+	<bean id="qq" class="com.gao.entity.Car">
+	<constructor-arg value="3"/>
+	<constructor-arg value="奇瑞qq"/>
+	<constructor-arg value="7898.55"/>
+	</bean>
+	
+	<!-- 构造方法的注入  顺序可变   使用index 方法 从0开始 -->
+	<bean id="volov" class="com.gao.entity.Car">
+	<constructor-arg value="1" index="0" />
+	<constructor-arg value="4555.66" index="2"/>
+	<constructor-arg value="沃尔沃" index="1"/>
+	</bean>
+	
+	<!-- 构造方法的注入  顺序可变   使用name 重点推荐使用-->
+	<bean id="harv" class="com.gao.entity.Car">
+	<constructor-arg value="7896.66" name="price"/>
+	<constructor-arg value="哈佛" name="brand"/>
+	<constructor-arg value="8" name="id"/>
+	</bean>
+	<!-- id  name  的区别  id不能使用特殊符号，name可以 -->
+	<bean id="harv1" class="com.gao.entity.Car" p:brand="长城"/>
+	<bean name="harv2" class="com.gao.entity.Car" p:brand="长城2" />
+	
+	
+	<!-- scope 的属性有singleton prototype  代表产生对象为单例或多例     默认单例-->
+	<bean id="harv3" class="com.gao.entity.Car" p:brand="长城3"  scope="singleton"/>
+	<!-- init-method 对象在创建时初始化的时候 执行的方法   destroy-methord=""  方法需写在实体类中     对象销毁的时候调用的方法destroy-method="" -->
+	<bean id="harv4" class="com.gao.entity.Car" p:brand="长城4"  scope="singleton"  init-method="begin" destroy-method="dis"/>
+	
+	<!-- parent  继承 parent="harv" 值为bean中id或name 的值         -->
+	<bean id="harv5" parent="harv" />
+	
+	<!-- abstract 代表当前bean为抽象的  能被继承 不能创建实例  abstract="true"  -->
+	<!-- java abstract的类 的特点  1,不能实例化 2,不需要保证方法为抽象方法 3，产生的目的是为了被继承  4， 有构造方法 -->
+	<!-- 构成多态的条件 1，要有继承 2， 父类引用指向子类对象 3，子类重写父类方法 -->
+	<bean name="harv6" class="com.gao.entity.Car" p:brand="长城2" abstract="true"/>
+	<!-- 对于引用属性的注入 -->
+	
+</beans>
