@@ -1,0 +1,22 @@
+    <?xml version="1.0" encoding="UTF-8"?>  
+    <!DOCTYPE dwr PUBLIC "-//GetAhead Limited//DTD Direct Web Remoting 2.0//EN" "http://www.getahead.ltd.uk/dwr/dwr20.dtd">  
+    <dwr>  
+        <allow>  
+        <!-- javascript的对象是jsmethodname,create="new"是DWR自己创建类 -->  
+            <create javascript="jsmethodname" creator="new" scope="application">  
+                <!-- value是java中的类名 -->  
+                <param name="class" value="org.li.dwr.Hello"></param>  
+    <!--<include>标签指定要公开给javascript的方法。不指定的话就公开所有方法。  
+    　　<exclude>标签指定要防止被访问的方法。-->  
+               <include method="alertStr"/>  
+               <include method="alertJSStr"/>  
+               <include method="returnAl"/>  
+               <include method="getList"/>  
+               <include method="getObj"/>  
+            </create>  
+      
+      <!--转换java类型   -->  
+           <convert converter="bean" match="org.li.dwr.InputRecord">  
+          </convert>  
+        </allow>  
+    </dwr>  

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gov.dao.RoomTypeMapper">
+    <resultMap id="BaseResultMap" type="com.gov.model.RoomType">
+        <result column="roomclass" property="roomclass" jdbcType="INTEGER"/>
+        <result column="roomname" property="roomname" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        roomtype_tab.roomclass,
+        roomtype_tab.roomname
+    </sql>
+    <select id="selectAll" resultMap="BaseResultMap">
+        select 
+        <include refid="Base_Column_List"/>
+        from roomtype_tab
+    </select>
+    </mapper>

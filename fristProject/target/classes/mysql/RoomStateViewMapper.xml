@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gov.dao.RoomStateViewMapper">
+    <resultMap id="BaseResultMap" type="com.gov.model.RoomStateView">
+        <id column="roomid" property="roomid" jdbcType="INTEGER"/>
+        <result column="roomsnum" property="roomsnum" jdbcType="VARCHAR"/>
+        <result column="roomstate" property="roomstate" jdbcType="INTEGER"/>
+        <result column="roomprice" property="roomprice" jdbcType="DOUBLE"/>
+        <result column="roomvip" property="roomvip" jdbcType="DOUBLE"/>
+        <result column="roomclass" property="roomclass" jdbcType="INTEGER"/>
+        <result column="roomname" property="roomname" jdbcType="VARCHAR"/>
+        <result column="roomfirmprice" property="roomfirmprice" jdbcType="DOUBLE"/>
+        <result column="roomcash" property="roomcash" jdbcType="DOUBLE"/>
+        <result column="statename" property="statename" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        room_state_view.roomid,
+        room_state_view.roomsnum,
+        room_state_view.roomstate,
+        room_state_view.roomprice,
+        room_state_view.roomvip,
+        room_state_view.roomclass,
+        room_state_view.roomname,
+        room_state_view.roomfirmprice,
+        room_state_view.roomcash,
+        room_state_view.statename
+    </sql>
+    <select id="selectAll" resultMap="BaseResultMap">
+        select 
+        <include refid="Base_Column_List"/>
+        from room_state_view
+    </select>
+    <select id="selectByRoomclass" resultMap="BaseResultMap">
+         select 
+        <include refid="Base_Column_List"/>
+        from room_state_view
+        <where>
+	        <if test="roomclass !=null and roomclass !=0">
+	        	roomclass = #{roomclass,jdbcType=INTEGER}
+	        	<if test="searchText!=null and searchText!=''">
+		        	AND(
+	        	</if>
+	        </if>
+            <if test="searchText!=null and searchText!=''">
+		        <trim  prefixOverrides="AND|OR">
+		              or roomsnum like CONCAT('%',#{searchText,jdbcType=VARCHAR},'%' )
+		              or roomprice like CONCAT('%',#{searchText,jdbcType=DOUBLE},'%' )
+		              or roomvip like CONCAT('%',#{searchText,jdbcType=DOUBLE},'%' )
+		              or roomname like CONCAT('%',#{searchText,jdbcType=VARCHAR},'%' )
+		              or roomfirmprice like CONCAT('%',#{searchText,jdbcType=DOUBLE},'%' )
+		              or statename like CONCAT('%',#{searchText,jdbcType=VARCHAR},'%' )
+	        	</trim>
+		        	<if test="roomclass !=null and roomclass !=0">
+		        	    )
+		        	</if>
+            </if>
+        </where>
+    </select>
+     <select id="selectSearch" parameterType="String" resultMap="BaseResultMap">
+        select
+        	<include refid="Base_Column_List"/>
+        from room_tab
+            <if test="searchText!=null and searchText!=''">
+		        <trim prefix="WHERE" prefixOverrides="AND|OR">
+		              or roomsnum like CONCAT('%',#{searchText,jdbcType=VARCHAR},'%' )
+		              or roomprice like CONCAT('%',#{searchText,jdbcType=DOUBLE},'%' )
+		              or roomvip like CONCAT('%',#{searchText,jdbcType=DOUBLE},'%' )
+		              or roomname like CONCAT('%',#{searchText,jdbcType=VARCHAR},'%' )
+		              or roomfirmprice like CONCAT('%',#{searchText,jdbcType=DOUBLE},'%' )
+		              or statename like CONCAT('%',#{searchText,jdbcType=VARCHAR},'%' )
+	        	</trim>
+            </if>
+    </select>
+     <select id="selectByRoomState" resultMap="BaseResultMap">
+         select 
+        <include refid="Base_Column_List"/>
+        from room_state_view
+        <where>
+	        <if test="roomstate !=null and roomstate !=0">
+	        	roomstate = #{roomstate,jdbcType=INTEGER}
+	        	<if test="searchText!=null and searchText!=''">
+		        	AND(
+	        	</if>
+	        </if>
+            <if test="searchText!=null and searchText!=''">
+		        <trim  prefixOverrides="AND|OR">
+		              or roomsnum like CONCAT('%',#{searchText,jdbcType=VARCHAR},'%' )
+		              or roomprice like CONCAT('%',#{searchText,jdbcType=DOUBLE},'%' )
+		              or roomvip like CONCAT('%',#{searchText,jdbcType=DOUBLE},'%' )
+		              or roomname like CONCAT('%',#{searchText,jdbcType=VARCHAR},'%' )
+		              or roomfirmprice like CONCAT('%',#{searchText,jdbcType=DOUBLE},'%' )
+		              or statename like CONCAT('%',#{searchText,jdbcType=VARCHAR},'%' )
+	        	</trim>
+		        	<if test="roomstate !=null and roomstate !=0">
+		        	   	<if test="searchText!=null and searchText!=''">
+		        	)
+	        			</if>
+		        	</if>
+            </if>
+        </where>
+    </select>
+</mapper>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gov.dao.UserMapper">
+    <resultMap id="BaseResultMap" type="com.gov.model.User">
+        <id column="userId" property="userId" jdbcType="INTEGER"/>
+        <result column="username" property="userName" jdbcType="VARCHAR"/>
+        <result column="password" property="password" jdbcType="VARCHAR"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="idCard" property="idCard" jdbcType="VARCHAR"/>
+        <result column="phoneNum" property="phoneNum" jdbcType="VARCHAR"/>
+        <result column="address" property="address" jdbcType="VARCHAR"/>
+        <result column="creator" property="creator" jdbcType="VARCHAR"/>
+        <result column="creatorTime" property="creatorTime" jdbcType="TIMESTAMP"/>
+        <result column="comment" property="comment" jdbcType="VARCHAR"/>
+         <result column="state" property="state" jdbcType="INTEGER"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        user_tab.userId,
+        user_tab.username,
+        user_tab.password,
+        user_tab.name,
+        user_tab.idCard,
+        user_tab.creator,
+        user_tab.creatorTime,
+        user_tab.comment,
+        user_tab.phoneNum,
+        user_tab.address,
+        user_tab.state
+    </sql>
+    <!-- selectByPrimaryKey -->
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap">
+        select 
+        <include refid="Base_Column_List" />
+        from user_tab where userId=#{userId,jdbcType=INTEGER}
+    </select>
+    <!-- selectAll -->
+	<select id="selectAll" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from user_tab
+	</select>
+	<select id="selectByUserAndPassword"  resultType="com.gov.model.User">
+	    select
+	    <include refid="Base_Column_List" />
+	    from user_tab where username=#{username,jdbcType=VARCHAR} and password=#{password,jdbcType=VARCHAR}
+	</select>
+	<select id="selectUser"  resultMap="BaseResultMap">
+	    select
+	    <include refid="Base_Column_List" />
+	    from user_tab where username=#{username,jdbcType=VARCHAR}
+	</select>
+	<update id="updatepassword">
+	    UPDATE `user_tab` SET `user_tab`.`password`=#{password,jdbcType=VARCHAR},`user_tab`.state=1 WHERE `user_tab`.`userId`=#{userid,jdbcType=INTEGER}
+	</update>
+</mapper>

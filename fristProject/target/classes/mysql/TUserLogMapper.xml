@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gov.dao.TUserLogMapper">
+    <resultMap id="BaseResultMap" type="com.gov.model.TUserLog">
+        <id column="logid" property="logId" jdbcType="INTEGER"/>
+        <result column="userid" property="userId" jdbcType="INTEGER"/>
+        <result column="ip" property="ip" jdbcType="VARCHAR"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="name1" property="name1" jdbcType="VARCHAR"/>
+        <result column="operation" property="operation" jdbcType="VARCHAR"/>
+        <result column="operationTime" property="operationTime" jdbcType="TIMESTAMP"/>
+        <result column="loginTime" property="loginTime" jdbcType="TIMESTAMP"/>
+        <result column="logoutTime" property="logoutTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        log_tab.logid,
+        log_tab.userid,
+        log_tab.ip,
+        log_tab.name,
+        log_tab.name1,
+        log_tab.operation,
+        log_tab.operationTime,
+        log_tab.loginTime,
+        log_tab.logoutTime
+    </sql>
+    <!-- selectByPrimaryKey -->
+    <select id="loginUrl" resultType="com.gov.model.TUserLog">
+        select * from log_tab where logId=#{logId,jdbcType=INTEGER}
+    </select>
+    <insert id="insertLog" parameterType="com.gov.model.TUserLog">
+        insert into log_tab(
+        	log_tab.userId,
+	        log_tab.ip,
+	        log_tab.name,
+	        log_tab.name1,
+	        log_tab.operation,
+	        log_tab.operationTime,
+	        log_tab.loginTime,
+	        log_tab.logoutTime
+        )values(
+        	#{userId,jdbcType=INTEGER},
+        	#{ip,jdbcType=VARCHAR},
+        	#{name,jdbcType=VARCHAR},
+        	#{name1,jdbcType=VARCHAR},
+        	#{operation,jdbcType=VARCHAR},
+        	#{operationTime,jdbcType=TIMESTAMP},
+        	#{loginTime,jdbcType=TIMESTAMP},
+        	#{logoutTime,jdbcType=TIMESTAMP}
+        )
+       
+    </insert>
+    
+</mapper>

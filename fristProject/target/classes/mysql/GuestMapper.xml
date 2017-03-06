@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gov.dao.GuestMapper">
+    <resultMap id="BaseResultMap" type="com.gov.model.Guest">
+        <id column="guestid" property="guestid" jdbcType="INTEGER"/>
+        <result column="guestname" property="guestname" jdbcType="VARCHAR"/>
+        <result column="guestidcard" property="guestidcard" jdbcType="VARCHAR"/>
+        <result column="guestphone" property="guestphone" jdbcType="VARCHAR"/>
+        <result column="guestaddress" property="guestaddress" jdbcType="VARCHAR"/>
+        <result column="guestsex" property="guestsex" jdbcType="VARCHAR"/>
+        <result column="guestimg" property="guestimg" jdbcType="VARCHAR"/>
+        <result column="guestroomid" property="guestroomid" jdbcType="INTEGER"/>
+        <result column="guestroomname" property="guestroomname" jdbcType="VARCHAR"/>
+        <result column="gueststate" property="gueststate" jdbcType="INTEGER"/>
+        <result column="guestroomprice" property="guestroomprice" jdbcType="DOUBLE"/>
+        <result column="guestroomvip" property="guestroomvip" jdbcType="DOUBLE"/>
+        <result column="guestroomtotleprice" property="guestroomtotleprice" jdbcType="DOUBLE"/>
+        <result column="guestprice" property="guestprice" jdbcType="DOUBLE"/>
+        <result column="guestremark" property="guestremark" jdbcType="VARCHAR"/>
+        <result column="guestbooktime" property="guestbooktime" jdbcType="VARCHAR"/>
+        <result column="guestcometime" property="guestcometime" jdbcType="VARCHAR"/>
+        <result column="guestleavetime" property="guestleavetime" jdbcType="VARCHAR"/>
+        <result column="guestchickouttime" property="guestchickouttime" jdbcType="VARCHAR"/>
+        <result column="timeoutprice" property="timeoutprice" jdbcType="DOUBLE"/>
+        <result column="timeouttime" property="timeouttime" jdbcType="INTEGER"/>
+        <result column="guestcash" property="guestcash" jdbcType="DOUBLE"/>
+        <result column="guestcashreturn" property="guestcashreturn" jdbcType="INTEGER"/>
+        <result column="guestcomepayee" property="guestcomepayee" jdbcType="VARCHAR"/>
+        <result column="guestleavepayee" property="guestleavepayee" jdbcType="VARCHAR"/>
+        <result column="guestcashremark" property="guestcashremark" jdbcType="VARCHAR"/>
+        <result column="guestcashremarkimg1" property="guestcashremarkimg1" jdbcType="VARCHAR"/>
+        <result column="guestcashremarkimg2" property="guestcashremarkimg2" jdbcType="VARCHAR"/>
+        <result column="guestcashremarkimg3" property="guestcashremarkimg3" jdbcType="VARCHAR"/>
+        <result column="guestcashremarkimg4" property="guestcashremarkimg4" jdbcType="VARCHAR"/>
+    	<result column="guestreviewusing" property="guestreviewusing" jdbcType="INTEGER"/>
+    	<result column="guestreview" property="giestreview" jdbcType="VARCHAR"/>
+    	<result column="guestreviewimg1" property="giestreviewimg1" jdbcType="VARCHAR"/>
+    	<result column="guestreviewimg2" property="giestreviewimg2" jdbcType="VARCHAR"/>
+    	<result column="guestreviewimg3" property="giestreviewimg3" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        guest_tab.guestid,
+        guest_tab.guestname,
+        guest_tab.guestidcard,
+        guest_tab.guestphone,
+        guest_tab.guestaddress,
+        guest_tab.guestsex,
+        guest_tab.guestimg,
+        guest_tab.guestroomid,
+        guest_tab.guestroomname,
+        guest_tab.gueststate,
+        guest_tab.guestroomprice,
+        guest_tab.guestroomvip,
+        guest_tab.guestroomtotleprice,
+        guest_tab.guestprice,
+        guest_tab.guestremark,
+        guest_tab.guestbooktime,
+        guest_tab.guestcometime,
+        guest_tab.guestleavetime,
+        guest_tab.guestchickouttime,
+        guest_tab.timeoutprice,
+        guest_tab.timeouttime,
+        guest_tab.guestcash,
+        guest_tab.guestcashreturn,
+        guest_tab.guestcomepayee,
+        guest_tab.guestleavepayee,
+        guest_tab.guestcashremark,
+        guest_tab.guestcashremarkimg1,
+        guest_tab.guestcashremarkimg2,
+        guest_tab.guestcashremarkimg3,
+        guest_tab.guestcashremarkimg4,
+        guest_tab.guestreviewusing,
+        guest_tab.guestreview,
+        guest_tab.guestreviewimg1,
+        guest_tab.guestreviewimg2,
+        guest_tab.guestreviewimg3,
+    </sql>
+    <!-- selectByPrimaryKey -->
+    <select id="selectByguestidcard" resultType="com.gov.model.Guest">
+        select * from  guest_tab where guest_tab.guestidcard=#{guestidcard,jdbcType=VARCHAR}
+    </select>
+    <select id="selectByRoomId" resultMap="BaseResultMap">
+        select * from  guest_tab where guest_tab.guestroomid=#{guestroomid,jdbcType=INTEGER}
+    </select>
+    <select id="selectByRoomName" resultMap="BaseResultMap">
+        select * from  guest_tab where guest_tab.guestroomname=#{guestroomname,jdbcType=VARCHAR}
+    </select>
+    <select id="selectByRoomidAndCometime" resultMap="BaseResultMap">
+        select * from  guest_tab where guest_tab.guestroomid=#{guestroomid,jdbcType=INTEGER}
+        and guest_tab.guestcometime=#{guestcometime,jdbcType=VARCHAR}
+    </select>
+    <select id="selectHotelGuestByRoomid" parameterType="Integer" resultType="com.gov.model.Guest">
+         select * from  guest_tab where guest_tab.guestroomid=#{guestroomid,jdbcType=INTEGER} and gueststate=2
+    </select>
+    <insert id="insert" parameterType="com.gov.model.Guest">
+        insert into guest_tab(
+        	guestname,
+        	guestidcard,
+        	guestphone,
+        	guestaddress,
+        	guestsex,
+        	guestimg,
+        	guestroomid,
+        	guestroomname,
+        	gueststate,
+        	guestroomprice,
+        	guestroomvip,
+        	guestroomtotleprice,
+        	guestprice,
+        	guestremark,
+        	guestbooktime,
+        	guestcometime,
+        	guestleavetime,
+        	guestchickouttime,
+        	timeoutprice,
+        	timeouttime,
+        	guestcash,
+        	guestcashreturn,
+        	guestcomepayee,
+        	guestleavepayee,
+        	guestcashremark,
+        	guestcashremarkimg1,
+        	guestcashremarkimg2,
+        	guestcashremarkimg3,
+        	guestcashremarkimg4,
+        	guestreviewusing,
+        	guestreview,
+        	guestreviewimg1,
+        	guestreviewimg2,
+        	guestreviewimg3
+        )values(
+        	#{guestname,jdbcType=VARCHAR},
+        	#{guestidcard,jdbcType=VARCHAR},
+        	#{guestphone,jdbcType=VARCHAR},
+        	#{guestaddress,jdbcType=VARCHAR},
+        	#{guestsex,jdbcType=VARCHAR},
+        	#{guestimg,jdbcType=VARCHAR},
+        	#{guestroomid,jdbcType=INTEGER},
+        	#{guestroomname,jdbcType=VARCHAR},
+        	#{gueststate,jdbcType=INTEGER},
+        	#{guestroomprice,jdbcType=DOUBLE},
+        	#{guestroomvip,jdbcType=DOUBLE},
+        	#{guestroomtotleprice,jdbcType=DOUBLE},
+        	#{guestprice,jdbcType=DOUBLE},
+        	#{guestremark,jdbcType=VARCHAR},
+        	#{guestbooktime,jdbcType=VARCHAR},
+        	#{guestcometime,jdbcType=VARCHAR},
+        	#{guestleavetime,jdbcType=VARCHAR},
+        	#{guestchickouttime,jdbcType=VARCHAR},
+        	#{timeoutprice,jdbcType=DOUBLE},
+        	#{timeouttime,jdbcType=VARCHAR},
+      		#{guestcash,jdbcType=DOUBLE},
+        	#{guestcashreturn,jdbcType=DOUBLE},
+        	#{guestcomepayee,jdbcType=VARCHAR},
+        	#{guestleavepayee,jdbcType=VARCHAR},
+        	#{guestcashremark,jdbcType=VARCHAR},
+        	#{guestcashremarkimg1,jdbcType=VARCHAR},
+        	#{guestcashremarkimg2,jdbcType=VARCHAR},
+        	#{guestcashremarkimg3,jdbcType=VARCHAR},
+        	#{guestcashremarkimg4,jdbcType=VARCHAR},
+        	#{guestreviewusing,jdbcType=INTEGER},
+        	#{guestreview,jdbcType=VARCHAR},
+        	#{guestreviewimg1,jdbcType=VARCHAR},
+        	#{guestreviewimg2,jdbcType=VARCHAR},
+        	#{guestreviewimg3,jdbcType=VARCHAR}
+        )
+    </insert>
+    <update id="updateGuestStateByGuestid" parameterType="Integer">
+        update guest_tab
+        set gueststate=#{gueststate,jdbcType=INTEGER}
+        where guestid=#{guestid,jdbcType=INTEGER}
+    </update>
+    <update id="updateGuestInfoByGuestid" parameterType="com.gov.model.Guest">
+        update guest_tab
+        <set>
+             <if test="guestname!=null">
+            	guestname = #{guestname,jdbcType=VARCHAR},
+            </if>
+            <if test="guestidcard!=null">
+        		guestidcard=#{guestidcard,jdbcType=VARCHAR},
+        	</if>
+        	<if test="guestphone!=null">
+        		guestphone=#{guestphone,jdbcType=VARCHAR},
+        	</if>
+        	<if test="guestaddress!=null">
+        		guestaddress=#{guestaddress,jdbcType=VARCHAR},
+        	</if>
+        	<if test="guestsex!=null">
+        		guestsex=#{guestsex,jdbcType=VARCHAR},
+        	</if>
+        	<if test="guestimg!=null">
+        		guestimg=#{guestimg,jdbcType=VARCHAR},
+        	</if>
+        	<if test="guestroomid!=null">
+        		guestroomid=#{guestroomid,jdbcType=INTEGER},
+        	</if>
+        	<if test="guestroomname!=null">
+        		guestroomname=#{guestroomname,jdbcType=VARCHAR},
+        	</if>
+        	<if test="gueststate!=null">
+        		gueststate=#{gueststate,jdbcType=INTEGER},
+        	</if>
+        	<if test="guestroomprice!=null">
+        		guestroomprice=#{guestroomprice,jdbcType=DOUBLE},
+        	</if>
+        	<if test="guestroomvip!=null">
+        		guestroomvip=#{guestroomvip,jdbcType=DOUBLE},
+        	</if>
+        	<if test="guestroomtotleprice!=null">
+        		guestroomtotleprice=#{guestroomtotleprice,jdbcType=DOUBLE},
+        	</if>
+        	<if test="guestprice!=null">
+        		guestprice=#{guestprice,jdbcType=DOUBLE},
+        	</if>
+        	<if test="guestremark!=null">
+        		guestremark=#{guestremark,jdbcType=VARCHAR},
+        	</if>
+        	<if test="guestbooktime!=null">
+        		guestbooktime=#{guestbooktime,jdbcType=VARCHAR},
+        	</if>
+        	<if test="guestcometime!=null">
+        		guestcometime=#{guestcometime,jdbcType=VARCHAR},
+        	</if>
+        	<if test="guestleavetime!=null">
+        		guestleavetime=#{guestleavetime,jdbcType=VARCHAR},
+        	</if>
+        	<if test="guestchickouttime!=null">
+        		guestchickouttime=#{guestchickouttime,jdbcType=VARCHAR},
+        	</if>
+        	<if test="timeoutprice!=null">
+        		timeoutprice=#{timeoutprice,jdbcType=DOUBLE},
+        	</if>
+        	<if test="gtimeouttime!=null">
+        		timeouttime=#{timeouttime,jdbcType=VARCHAR},
+        	</if>
+        	<if test="guestcash!=null">
+      			guestcash=#{guestcash,jdbcType=DOUBLE},
+      		</if>
+      		<if test="guestcomepayee!=null">
+        		guestcomepayee=#{guestcomepayee,jdbcType=DOUBLE},
+        	</if>
+      		<if test="guestleavepayee!=null">
+        		guestleavepayee=#{guestleavepayee,jdbcType=DOUBLE},
+        	</if>
+      		<if test="guestcashreturn!=null">
+        		guestcashreturn=#{guestcashreturn,jdbcType=DOUBLE},
+        	</if>
+        	<if test="guestcashremark!=null">
+        		guestcashremark=#{guestcashremark,jdbcType=VARCHAR},
+        	</if>
+        	<if test="guestcashremarkimg1!=null">
+        		guestcashremarkimg1=#{guestcashremarkimg1,jdbcType=VARCHAR},
+        	</if>
+        	<if test="guestcashremarkimg2!=null">
+        		guestcashremarkimg2=#{guestcashremarkimg2,jdbcType=VARCHAR},
+        	</if>
+        	<if test="guestcashremarkimg3!=null">
+        		guestcashremarkimg3=#{guestcashremarkimg3,jdbcType=VARCHAR},
+        	</if>
+        	<if test="guestcashremarkimg4!=null">
+        		guestcashremarkimg4=#{guestcashremarkimg4,jdbcType=VARCHAR},
+        	</if>
+        	<if test="guestreviewusing!=null">
+        		guestreviewusing=#{guestreviewusing,jdbcType=INTEGER},
+        	</if>
+        	<if test="guestreview!=null">
+        		guestreview=#{guestreview,jdbcType=VARCHAR},
+        	</if>
+        	<if test="guestreviewimg1!=null">
+        		guestreviewimg1=#{guestreviewimg1,jdbcType=VARCHAR},
+        	</if>
+        	<if test="guestreviewimg2!=null">
+        		guestreviewimg2=#{guestreviewimg2,jdbcType=VARCHAR},
+        	</if>
+        	<if test="guestreviewimg3!=null">
+        		guestreviewimg3=#{guestreviewimg3,jdbcType=VARCHAR}
+        	</if>
+        </set>
+        where guestid=#{guestid,jdbcType=INTEGER}
+    </update>
+    <select id="selectbyRelationshipcomeTime" resultMap="BaseResultMap">
+         select * from  
+         	guest_tab where guestcometime &gt;= #{guestcometime,jdbcType=VARCHAR}
+         	<if test="searchText!=null and searchText!=''">
+         	    AND (
+		        <trim>
+		              guestname like CONCAT('%',#{searchText,jdbcType=VARCHAR},'%' )
+		              or guestidcard like CONCAT('%',#{searchText,jdbcType=VARCHAR},'%' )
+		              or guestsex like CONCAT('%',#{searchText,jdbcType=VARCHAR},'%' )
+		              or guestroomname like CONCAT('%',#{searchText,jdbcType=VARCHAR},'%' )
+		              or guestcometime like CONCAT('%',#{searchText,jdbcType=VARCHAR},'%' )
+		              or guestleavetime like CONCAT('%',#{searchText,jdbcType=VARCHAR},'%' )
+		              or guestprice like CONCAT('%',#{searchText,jdbcType=DOUBLE},'%' )
+	        	</trim>
+		        	    )
+            </if>
+        	And gueststate = 3
+    </select>
+    <select id="selectGuestBookRoom" resultMap="BaseResultMap">
+        select * from  guest_tab where
+        	gueststate=1
+        	<if test="searchText!=null and searchText!=''">
+         	    AND (
+		        <trim>
+		              guestname like CONCAT('%',#{searchText,jdbcType=VARCHAR},'%' )
+		              or guestidcard like CONCAT('%',#{searchText,jdbcType=VARCHAR},'%' )
+		              or guestsex like CONCAT('%',#{searchText,jdbcType=VARCHAR},'%' )
+		              or guestroomname like CONCAT('%',#{searchText,jdbcType=VARCHAR},'%' )
+		              or guestcometime like CONCAT('%',#{searchText,jdbcType=VARCHAR},'%' )
+		              or guestleavetime like CONCAT('%',#{searchText,jdbcType=VARCHAR},'%' )
+	        	</trim>
+		        	    )
+            </if>
+            <if test="orderBy=='ASC'">
+                ORDER BY guestcometime ASC
+            </if>
+            <if test="orderBy=='DESC'">
+                ORDER BY guestcometime DESC
+            </if>
+    </select>
+</mapper>
