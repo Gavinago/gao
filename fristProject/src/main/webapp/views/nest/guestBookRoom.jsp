@@ -81,7 +81,7 @@
 							${item.guestleavetime}
 						</td>
 						<td>
-							<a  herf="javascript:bookCheckinRoom("+${item.guestid}+")">入住</a> | <a herf="javascript:exitBookRoom("+${item.guestid}+")">退订</a>
+							<a  href='<c:url value="/back/BookRoomOperation.do?guestid=${item.guestid}"/>' target="_blank" style="cursor: pointer;">入住</a> &nbsp;|&nbsp; <a herf="javascript:void(0)" onclick="javascript:exitBookRoom('${item.guestid}')" style="cursor: pointer;">退订</a>
 						</td>
 					</tr>
 				</c:forEach>
@@ -135,9 +135,6 @@
 var url="<c:url value='ajax/ajaxBookRoomOperation.do'/>";
 var orderby = "";
 var SearchText ="";
-function bookCheckinRoom(args){
-	ajaxOperation(url,args,"checkin")
-}
 function exitBookRoom(args){
 	ajaxOperation(url,id,"exit");
 }

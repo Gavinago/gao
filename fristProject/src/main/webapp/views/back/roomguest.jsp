@@ -39,11 +39,8 @@
 						<div class="form-group">
 									<label class="col-sm-3 control-label" for="roomsnum1">房号:</label>
 									<div class="col-sm-9">
-											<input class="form-control" id="guestroomname" type="hidden" name="guestroomname" value = "${roomsnum}"/>
-											<input class="form-control" id="guestroomid" type="hidden" name="guestroomid" value = "${roomid}"/>
-											<input class="form-control" id="gueststate" type="hidden" name="gueststate" value = "${roomstate}"/>
-											<input class="form-control" id="roomcash" type="hidden" name="guestcash" value = "${roomcash}"/>
-											<input class="form-control" id="roomsnum1" type="text" name="roomsnum1" value = "${roomsnum}" disabled="disabled"/>
+											<input class="form-control" id="guestroomid" type="hidden" name="guestroomid" value ="${room.roomid}"/>
+											<input class="form-control" id="roomsnum1" type="text" name="roomsnum1" value = "${room.roomsnum}" disabled="disabled"/>
 									</div>
 								</div>
 								<div class="form-group">
@@ -76,7 +73,7 @@
 								<div class="form-group">
 									<label class="col-sm-3 control-label" for="guestaddress">家庭住址:</label>
 									<div class="col-sm-9">
-										<input class="form-control" id="guestaddress" name="uestaddress" type="text"  placeholder="家庭住址">
+										<input class="form-control" id="guestaddress" name="guestaddress" type="text"  placeholder="家庭住址">
 									</div>
 								</div>
 								<div class="form-group">
@@ -164,7 +161,6 @@ $(function () {
     });
     })();
 });
-debugger;
 addTime("guestcometime");
 function addTime(param){
 	var dayTime =getNowFormatDate();
@@ -187,6 +183,7 @@ function uploadfile(obj) {
 
 function submitbut(){
 	addTime("guestcometime");
+	$("#guestcometime").attr("disabled",false);
 	$.ajax({
 		url:"<c:url value='/back/room/guestinfo.do'/>",
 		type:"post",
@@ -195,6 +192,7 @@ function submitbut(){
 		success:function(data){
 			if(data[0]==1){
 				$("#guestorder").click();
+				$("#guestcometime").attr("disabled",true);
 				$("#submitbutton").attr("disabled",true);
 			}else if(data[0]==-1){
 				alert("用户信息不能为空！");
@@ -259,36 +257,7 @@ function filesize(param) {
 //         }, 1000)  
 //     }  
     
-    
-function getNowFormatDate() {
-    var date = new Date();
-    var seperator1 = "-";
-    var seperator2 = ":";
-    var month = date.getMonth() + 1;
-    var strDate = date.getDate();
-    var hours = date.getHours();
-    var minutes = date.getMinutes();
-    var seconds = date.getSeconds(); 
-    if (month >= 1 && month <= 9) {
-        month = "0" + month;
-    }
-    if (strDate >= 0 && strDate <= 9) {
-        strDate = "0" + strDate;
-    }
-    if(hours>=0&&hours<=9){
-    	hours = "0"+hours;
-    }
-    if(minutes>=0&&minutes<=9){
-    	minutes ="0"+minutes;
-    }
-	if(seconds>=0&&seconds<=9){
-		seconds = "0"+seconds;
-    }
-    var currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate
-            + " " + hours + seperator2 + minutes
-            + seperator2 + seconds;
-    return currentdate;
-} 
+ 
 </script> 
 
 </body>

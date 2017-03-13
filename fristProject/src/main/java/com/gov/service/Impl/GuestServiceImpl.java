@@ -163,6 +163,18 @@ public class GuestServiceImpl implements GuestService {
 		PageInfo<Guest> pagelist = new PageInfo<Guest>(list);
 		return pagelist;
 	}
+
+	@Override
+	public List<Guest> selectGuestByGuestid(Integer guestid) {
+		List<Guest> list = guestMapper.selectGuestByGuestid(guestid);
+		return list;
+	}
+
+	@Override
+	public int deleteGuestByGuestid(Integer guestid) {
+		int i = guestMapper.deleteGuestByGuestid(guestid);
+		return i;
+	}
 	
 	
 	

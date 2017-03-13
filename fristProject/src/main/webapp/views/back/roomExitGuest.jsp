@@ -33,12 +33,12 @@
 				</div>
 			</div>
 				<div class="row ">
-					<form class="form-horizontal" role="form" id="myform" enctype="multipart/form-data" method="POST">
+					<form class="form-horizontal" role="form" id="myform" method="POST">
 						<div class="col-xs-12 col-sm-6">
 								<div class="form-group">
 									<label class="col-sm-3 control-label" for="roomsnum1">房号:</label>
 									<div class="col-sm-9">
-											<input class="form-control" id="roomsnum1" type="text" name="roomsnum1" value = "${guest.guestroomname}" disabled="disabled"/>
+											<input class="form-control" id="roomsnum1" type="text" name="roomsnum1" value = "${guest.guestroomname}" />
 									</div>
 								</div>
 								<div class="form-group">
@@ -90,7 +90,7 @@
 										<input type="button" id="submitbutton"  class="btn btn-default" onclick="javascript:submitbut();" value="退房">
 									</div>
 									<div class="col-sm-4 ">
-										<input type="reset" class="btn btn-default" value="取消">
+										<input type="reset" class="btn btn-default"  value="取消">
 									</div>
 								</div>
 						</div>
@@ -104,6 +104,22 @@
 							</div>
 							<div class="col-xs-12 col-sm-1">
 							</div>
+							<div class="col-xs-12 col-sm-5">
+								<label class="col-sm-3 control-label" for="guestroomprice">房费:</label>
+								<div class="col-xs-12 col-sm-9">
+									<input class="form-control" id="guestroomprice" name="guestroomprice" type="text"  value="${guest.guestroomprice}">
+								</div>
+							</div>
+							<div class="col-xs-12 col-sm-1">
+							</div>
+							<div class="col-xs-12 col-sm-5">
+								<label class="col-sm-3 control-label" for="guestroomprice">押金:</label>
+								<div class="col-xs-12 col-sm-9">
+									<input class="form-control" id="guestcash" name="guestcash" type="text"  value="${guest.guestcash}">
+								</div>
+							</div>
+							<div class="col-xs-12 col-sm-1">
+							</div>
 						</div>
 				</div>
 			</div>
@@ -112,9 +128,46 @@
 		</div>
 	</div>
 </div>
+
+<input type="hidden" class="btn btn-primary btn-lg" id="ExitRoom"  data-toggle="modal" data-target="#exitRoom"/>
+<!-- 模态框（Modal） -->
+<div class="modal fade" id="exitRoom" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+					&times;
+				</button>
+				<h4 class="modal-title" id="myModalLabel">
+					模态框（Modal）标题
+				</h4>
+			</div>
+			<div class="modal-body">
+				在这里添加一些文本
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">关闭
+				</button>
+				<button type="button" class="btn btn-primary">
+					提交更改
+				</button>
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal -->
+</div>
+
 <script type="text/javascript">
+$(function(){
+	$("input[class='form-control'],input[type='reset']").attr("disabled",true);
+	$("#guestleavetime").val(getNowFormatDate());
+	
+});
 function closePage(){
 	window.close();
+}
+function submitbut(){
+	$("#guestleavetime").val(getNowFormatDate());
+	$("#ExitRoom").click();
 }
 </script>
 </body>

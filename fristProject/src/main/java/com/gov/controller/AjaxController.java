@@ -1,5 +1,7 @@
 package com.gov.controller;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Controller;
@@ -85,19 +87,28 @@ public class AjaxController {
 		return mav;
 	}
 	@RequestMapping(value="/ajax/ajaxBookRoomOperation",method=RequestMethod.GET)
-	public ModelAndView ajaxBookRoomOperation(String guestid,String action,ParamPage param){
+	public ModelAndView ajaxBookRoomOperation(Integer guestid,String action,ParamPage param){
 		ModelAndView mav = new ModelAndView();
-		if(guestid.equals("0")){
+		if(guestid.equals(0)){
 			mav.setViewName("nest/guestBookRoom");
 			mav = this.GuestBookRoom(mav, param,action);
 		}else{
 			if(action.equals("checkin")){
-				
+				mav = this.BookGuestCheckin(mav, param, guestid);
+				mav.setViewName("/back/bookGuestcheckinRoominfo");
 			}else if(action.equals("exit")){
-				
+				this.bookGuestExit(mav, param, guestid);
 			}
 			
 		}
+		mav.addObject(Constant.MODEL_KEY_PARAMPAGE, param);
+		return mav;
+	}
+	@RequestMapping(value="/back/BookRoomOperation",method=RequestMethod.GET)
+	public ModelAndView BookRoomOperation(Integer guestid,ParamPage param){
+		ModelAndView mav = new ModelAndView();
+		mav = this.BookGuestCheckin(mav, param, guestid);
+		mav.setViewName("/back/bookGuestcheckinRoominfo");
 		mav.addObject(Constant.MODEL_KEY_PARAMPAGE, param);
 		return mav;
 	}
@@ -114,6 +125,16 @@ public class AjaxController {
 	public ModelAndView GuestBookRoom(ModelAndView mav,ParamPage param,String orderBy){
 		PageInfo<Guest> pageinfo = guestService.selectGuestBookRoom(param.getPageNum(),param.getPageSize(), param.getSearchText(), orderBy);
 		mav.addObject(Constant.MODEL_KEY_PAGEINFO, pageinfo);
+		return mav;
+	}
+	public ModelAndView BookGuestCheckin(ModelAndView mav,ParamPage param,Integer guestid){
+		List<Guest> list = guestService.selectGuestByGuestid(guestid);
+		if(list.size()>0)
+		mav.addObject("guest",list.get(0));
+		return mav;
+	}
+	public ModelAndView bookGuestExit(ModelAndView mav,ParamPage param,Integer guestid){
+		guestService.updateGuestStateByGuestid(4, guestid);
 		return mav;
 	}
 	

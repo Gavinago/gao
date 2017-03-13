@@ -75,22 +75,92 @@
         guest_tab.guestreviewimg2,
         guest_tab.guestreviewimg3,
     </sql>
+    <sql id="Base_Column_One__Img">
+    	guest_tab.guestid,
+        guest_tab.guestname,
+        guest_tab.guestidcard,
+        guest_tab.guestphone,
+        guest_tab.guestaddress,
+        guest_tab.guestsex,
+        guest_tab.guestimg,
+        guest_tab.guestroomid,
+        guest_tab.guestroomname,
+        guest_tab.gueststate,
+        guest_tab.guestroomprice,
+        guest_tab.guestroomvip,
+        guest_tab.guestroomtotleprice,
+        guest_tab.guestprice,
+        guest_tab.guestremark,
+        guest_tab.guestbooktime,
+        guest_tab.guestcometime,
+        guest_tab.guestleavetime,
+        guest_tab.guestchickouttime,
+        guest_tab.timeoutprice,
+        guest_tab.timeouttime,
+        guest_tab.guestcash,
+        guest_tab.guestcashreturn,
+        guest_tab.guestcomepayee,
+        guest_tab.guestleavepayee,
+        guest_tab.guestcashremark
+    </sql>
+    <sql id="Base_Column_ON__Img">
+    	guest_tab.guestid,
+        guest_tab.guestname,
+        guest_tab.guestidcard,
+        guest_tab.guestphone,
+        guest_tab.guestaddress,
+        guest_tab.guestsex,
+        guest_tab.guestroomid,
+        guest_tab.guestroomname,
+        guest_tab.gueststate,
+        guest_tab.guestroomprice,
+        guest_tab.guestroomvip,
+        guest_tab.guestroomtotleprice,
+        guest_tab.guestprice,
+        guest_tab.guestremark,
+        guest_tab.guestbooktime,
+        guest_tab.guestcometime,
+        guest_tab.guestleavetime,
+        guest_tab.guestchickouttime,
+        guest_tab.timeoutprice,
+        guest_tab.timeouttime,
+        guest_tab.guestcash,
+        guest_tab.guestcashreturn,
+        guest_tab.guestcomepayee,
+        guest_tab.guestleavepayee,
+        guest_tab.guestcashremark
+    </sql>
     <!-- selectByPrimaryKey -->
     <select id="selectByguestidcard" resultType="com.gov.model.Guest">
-        select * from  guest_tab where guest_tab.guestidcard=#{guestidcard,jdbcType=VARCHAR}
+        select 
+        <include refid="Base_Column_One__Img"/>
+        from  guest_tab where guest_tab.guestidcard=#{guestidcard,jdbcType=VARCHAR}
     </select>
     <select id="selectByRoomId" resultMap="BaseResultMap">
-        select * from  guest_tab where guest_tab.guestroomid=#{guestroomid,jdbcType=INTEGER}
+        select  
+         <include refid="Base_Column_ON__Img"/>
+        from  guest_tab where guest_tab.guestroomid=#{guestroomid,jdbcType=INTEGER}
     </select>
     <select id="selectByRoomName" resultMap="BaseResultMap">
-        select * from  guest_tab where guest_tab.guestroomname=#{guestroomname,jdbcType=VARCHAR}
+        select 
+         <include refid="Base_Column_ON__Img"/>
+        from  guest_tab where guest_tab.guestroomname=#{guestroomname,jdbcType=VARCHAR}
     </select>
     <select id="selectByRoomidAndCometime" resultMap="BaseResultMap">
-        select * from  guest_tab where guest_tab.guestroomid=#{guestroomid,jdbcType=INTEGER}
+        select 
+        <include refid="Base_Column_ON__Img"/>
+        from  guest_tab where guest_tab.guestroomid=#{guestroomid,jdbcType=INTEGER}
         and guest_tab.guestcometime=#{guestcometime,jdbcType=VARCHAR}
     </select>
     <select id="selectHotelGuestByRoomid" parameterType="Integer" resultType="com.gov.model.Guest">
-         select * from  guest_tab where guest_tab.guestroomid=#{guestroomid,jdbcType=INTEGER} and gueststate=2
+         select 
+         <include refid="Base_Column_One__Img"/>
+         from  guest_tab where guest_tab.guestroomid=#{guestroomid,jdbcType=INTEGER} and gueststate=2
+    </select>
+    <select id="selectGuestByGuestid" parameterType="Integer" resultType="com.gov.model.Guest">
+         select 
+         <include refid="Base_Column_One__Img"/>
+         from  guest_tab where guest_tab.guestid=#{guestid,jdbcType=INTEGER} and gueststate=1
     </select>
     <insert id="insert" parameterType="com.gov.model.Guest">
         insert into guest_tab(
@@ -318,4 +388,8 @@
                 ORDER BY guestcometime DESC
             </if>
     </select>
+    <delete id="deleteGuestByGuestid" parameterType="Integer">
+    	delete from guest_tab where guestid = #{guestid,jdbcType=INTEGER}
+    
+    </delete>
 </mapper>

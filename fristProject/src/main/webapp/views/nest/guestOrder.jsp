@@ -85,7 +85,7 @@
 									收款人:
 								</label>
 								<div class="col-sm-8">
-									<input type="text" class="form-control" id="inputWarning" disabled="disabled" value="${guest.guestpayee}">
+									<input type="text" class="form-control" id="inputWarning" disabled="disabled" value="${guest.guestcomepayee}">
 								</div>
 							</div>
 						</div>

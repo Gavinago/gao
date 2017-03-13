@@ -71,10 +71,10 @@
 						</td>
 						<c:choose>
 							<c:when test="${item.roomstate eq 1}">
-								<td><a href='<c:url value="back/room/roomguest.do?roomsnum=${item.roomsnum}&roomstate=${item.roomstate}&roomid=${item.roomid}&roomidcash=${item.roomcash}"/>' target="_blank" >入住</a></td>
+								<td><a href='<c:url value="/back/room/roomguest.do?roomid=${item.roomid}"/>' target="_blank" >入住</a></td>
 							</c:when>
 							<c:when test="${item.roomstate eq 2}">
-								<td><a href='<c:url value="/back/room/roomguest.do?roomsnum=${item.roomsnum}&roomstate=${item.roomstate}&roomid=${item.roomid}&roomidcash=${item.roomcash}"/>' target="_blank" >退房</a></td>
+								<td><a href='<c:url value="/back/room/roomguest.do?roomid=${item.roomid}"/>' target="_blank" >退房</a></td>
 							</c:when>
 						</c:choose>
 					</tr>

@@ -46,7 +46,8 @@
 <input id="changepass" type="hidden" >
 <script type="text/javascript">
 $(function(){
-	if(${change}){
+	var flag = ${change==true};
+	if(flag){
 		$("#changepassword").click();
 		$("#changepass").click();
 	}

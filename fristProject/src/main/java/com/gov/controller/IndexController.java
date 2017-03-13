@@ -45,13 +45,10 @@ public class IndexController {
 		ModelAndView mav = new ModelAndView("nest/guestOrder");
 		List<Guest> list = guestService.selectByRoomidAndCometime(guestroomid,guestcometime);
 		Guest guest = list.get(0);
-		mav.addObject("guest", guest);
-		String roomname = guest.getGuestroomname();
-		Integer roomid = guest.getGuestroomid();
 		String cometime = guest.getGuestcometime();
 		CompareTime ct = new CompareTime();
 		long come = ct.getTimeMillisecond(cometime);
-		mav.addObject("order","XS"+come+"L"+roomid);
+		mav.addObject("order","XS"+come+"L00"+guest.getGuestid());
 		mav.addObject("guest", guest);
 		return mav;
 	}
