@@ -36,5 +36,20 @@ var currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate
         + seperator2 + seconds;
 return currentdate;
 } 
+function commonAjax(url,param){
+	var result="";
+	$.ajax({
+		url:url+"?"+param,
+		type:"post",
+		async: false,
+		dataType:"html",
+		success:function(data){
+			result = data;
+		},
+		error:function(e){
+		}
+	});
+	return result;
+}
 </script>
 <footer class="navbar navbar-default navbar-fixed-bottom text-center">${footer}</footer>

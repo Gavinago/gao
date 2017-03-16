@@ -139,11 +139,9 @@
 					&times;
 				</button>
 				<h4 class="modal-title" id="myModalLabel">
-					模态框（Modal）标题
 				</h4>
 			</div>
-			<div class="modal-body">
-				在这里添加一些文本
+			<div class="modal-body" id="modelBody">
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal">关闭
@@ -168,6 +166,15 @@ function closePage(){
 function submitbut(){
 	$("#guestleavetime").val(getNowFormatDate());
 	$("#ExitRoom").click();
+	$("#modelBody").html('<img src="<c:url value="/assets/img/wait5.gif"/>" />');
+	var url ="<c:url value='/ajax/ajaxExitRoomSelect.do' />";
+	var param = "guestid=${guest.guestid}";
+	var data = commonAjax(url,param);
+	if(data){
+		$("#modelBody").html(data);
+	}else{
+		$("#modelBody").html("<h1>出现异常！</h1>");
+	}
 }
 </script>
 </body>

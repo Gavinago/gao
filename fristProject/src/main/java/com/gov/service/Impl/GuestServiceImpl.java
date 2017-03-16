@@ -165,8 +165,8 @@ public class GuestServiceImpl implements GuestService {
 	}
 
 	@Override
-	public List<Guest> selectGuestByGuestid(Integer guestid) {
-		List<Guest> list = guestMapper.selectGuestByGuestid(guestid);
+	public List<Guest> selectGuestByGuestid(Integer guestid,Integer gueststate) {
+		List<Guest> list = guestMapper.selectGuestByGuestid(guestid,gueststate);
 		return list;
 	}
 

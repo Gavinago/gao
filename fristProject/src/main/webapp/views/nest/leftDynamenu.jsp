@@ -13,7 +13,7 @@ var roomname=[];
 roomtype();
 function roomtype(){
 	<c:forEach items="${step}" var="item">
-		roomname[${item.clazz}]="${item.stepname}";
+		roomname["${item.clazz}"]="${item.stepname}";
 	</c:forEach>
 }
 changeroom("<c:url value='/ajax/selectAllRoom.do?clazz=220'/>","");

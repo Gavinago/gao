@@ -15,7 +15,7 @@ public interface GuestService {
 	public int updateGuestInfoByGuestid(Guest guest);
 	public int updateGuestStateByGuestid(Integer gueststate,Integer guestid);
 	public List<Guest> selectByRoomId(Integer guestroomid);
-	public List<Guest> selectGuestByGuestid(Integer guestid);
+	public List<Guest> selectGuestByGuestid(Integer guestid,Integer gueststate);
 	public int deleteGuestByGuestid(Integer guestid);
 	public PageInfo<Guest> selectByRoomName(String guestroomname,Integer pageNum, Integer pageSize);
 	public List<Guest>selectByRoomidAndCometime(Integer guestroomid,String guestcometime);

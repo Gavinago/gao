@@ -36,5 +36,4 @@ public class Path implements Serializable{
 	public String toString() {
 		return "Path [path=" + path + ", pathName=" + pathName + ", url=" + url + ", state=" + state + "]";
 	}
-	
 }

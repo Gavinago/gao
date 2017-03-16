@@ -15,7 +15,7 @@ public interface GuestMapper {
 	public int updateGuestInfoByGuestid(Guest guest);
 	public int updateGuestStateByGuestid(@Param(value="gueststate")Integer gueststate,@Param(value="guestid")Integer guestid);
 	public List<Guest> selectByRoomId(@Param(value="guestroomid")Integer guestroomid);
-	public List<Guest> selectGuestByGuestid(@Param(value="guestid")Integer guestid);
+	public List<Guest> selectGuestByGuestid(@Param(value="guestid")Integer guestid,@Param(value="gueststate")Integer gueststate);
 	public List<Guest> selectByRoomName(@Param(value="guestroomname")String guestroomname);
 	public List<Guest>selectByRoomidAndCometime(@Param(value="guestroomid")Integer guestroomid,@Param(value="guestcometime")String guestcometime);
 	public Guest selectHotelGuestByRoomid(@Param(value="guestroomid")Integer guestroomid);

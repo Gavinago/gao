@@ -26,7 +26,8 @@ public class IndexController {
 	private UserRightViewService userRightViewService;
 	@Resource
 	private GuestService guestService;
-	
+	@Resource
+	private CompareTime ct;
 	@RequestMapping(value="ajax/myinfo.do")
 	@ResponseBody
 	public ModelAndView myinfo(){
@@ -46,7 +47,6 @@ public class IndexController {
 		List<Guest> list = guestService.selectByRoomidAndCometime(guestroomid,guestcometime);
 		Guest guest = list.get(0);
 		String cometime = guest.getGuestcometime();
-		CompareTime ct = new CompareTime();
 		long come = ct.getTimeMillisecond(cometime);
 		mav.addObject("order","XS"+come+"L00"+guest.getGuestid());
 		mav.addObject("guest", guest);

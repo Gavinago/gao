@@ -1,6 +1,10 @@
 package com.gov.service.Impl;
 
 public class Test {
+	
+	public Test(){
+		
+	}
 
 	public String reversal(String str){
 		StringBuilder sb = new StringBuilder();

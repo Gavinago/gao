@@ -160,7 +160,7 @@
     <select id="selectGuestByGuestid" parameterType="Integer" resultType="com.gov.model.Guest">
          select 
          <include refid="Base_Column_One__Img"/>
-         from  guest_tab where guest_tab.guestid=#{guestid,jdbcType=INTEGER} and gueststate=1
+         from  guest_tab where guest_tab.guestid=#{guestid,jdbcType=INTEGER} and gueststate=#{gueststate,jdbcType=INTEGER}
     </select>
     <insert id="insert" parameterType="com.gov.model.Guest">
         insert into guest_tab(

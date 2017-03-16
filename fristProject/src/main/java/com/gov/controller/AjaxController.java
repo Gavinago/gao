@@ -112,6 +112,18 @@ public class AjaxController {
 		mav.addObject(Constant.MODEL_KEY_PARAMPAGE, param);
 		return mav;
 	}
+	@RequestMapping(value="/ajax/ajaxExitRoomSelect",method=RequestMethod.POST)
+	@ResponseBody
+	public ModelAndView exitRoomSelect(Integer guestid){
+		ModelAndView mav = new ModelAndView("/nest/exitRoomSelect");
+		List<Guest> list = guestService.selectGuestByGuestid(guestid,2);
+		Guest guest = list.get(0);
+		String cometime = guest.getGuestcometime();
+		long come = compareTime.getTimeMillisecond(cometime);
+		mav.addObject("order","XS"+come+"L00"+guest.getGuestid());
+		mav.addObject("guest", guest);
+		return mav;
+	}
 	public ModelAndView selectbyRelationshipcomeTime(ModelAndView mav,Integer pageNum,Integer pagesize,String compareTime,String searchText){
 		PageInfo<Guest> pageinfo = guestService.selectbyRelationshipcomeTime(pageNum,pagesize, compareTime,searchText);
 		mav.addObject(Constant.MODEL_KEY_PAGEINFO, pageinfo);
@@ -128,7 +140,7 @@ public class AjaxController {
 		return mav;
 	}
 	public ModelAndView BookGuestCheckin(ModelAndView mav,ParamPage param,Integer guestid){
-		List<Guest> list = guestService.selectGuestByGuestid(guestid);
+		List<Guest> list = guestService.selectGuestByGuestid(guestid,1);
 		if(list.size()>0)
 		mav.addObject("guest",list.get(0));
 		return mav;
