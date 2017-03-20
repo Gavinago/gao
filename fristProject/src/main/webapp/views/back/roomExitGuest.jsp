@@ -163,13 +163,16 @@ $(function(){
 function closePage(){
 	window.close();
 }
+var data = "";
 function submitbut(){
 	$("#guestleavetime").val(getNowFormatDate());
 	$("#ExitRoom").click();
+	if(!data){
 	$("#modelBody").html('<img src="<c:url value="/assets/img/wait5.gif"/>" />');
 	var url ="<c:url value='/ajax/ajaxExitRoomSelect.do' />";
 	var param = "guestid=${guest.guestid}";
-	var data = commonAjax(url,param);
+		data = commonAjax(url,param);
+	}
 	if(data){
 		$("#modelBody").html(data);
 	}else{
